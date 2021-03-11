@@ -63,6 +63,7 @@ public class GameRunner {
 			
 			//Final Print of player Position
 			System.out.printf("%s is at position %d.\n",player_1.player_name , player_1.current_position);
+			System.out.printf("%s has played %d times.\n",player_1.player_name , player_1.turns_played);
 		}
 		
 	
@@ -77,7 +78,12 @@ public class GameRunner {
 			
 			player player1 = new player(0,0,"Shubham");
 			System.out.printf("Snake and ladders game :\n\n");
-			player_move(player1);
+		
+			
+			while(player1.current_position != WINNING_POSITION) {
+				player_move(player1);
+			}
+			
 			
 		}
 }
