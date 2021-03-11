@@ -79,8 +79,8 @@ public class GameRunner {
 			player player1 = new player(0,0,"Shubham");
 			System.out.printf("Snake and ladders game :\n\n");
 		
-			
-			while(player1.current_position != WINNING_POSITION) {
+			//Now Program will terminate after a player reaches 1 million moves
+			while(player1.current_position != WINNING_POSITION && player1.turns_played < 1000000) {
 				player_move(player1);
 			}
 			
