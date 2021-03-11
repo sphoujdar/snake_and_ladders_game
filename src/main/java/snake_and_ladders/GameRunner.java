@@ -63,7 +63,7 @@ public class GameRunner {
 			
 			//Final Print of player Position
 			System.out.printf("%s is at position %d.\n",player_1.player_name , player_1.current_position);
-			System.out.printf("%s has played %d times.\n",player_1.player_name , player_1.turns_played);
+			System.out.printf("%s has played %d times. \n",player_1.player_name , player_1.turns_played);
 		}
 		
 	
