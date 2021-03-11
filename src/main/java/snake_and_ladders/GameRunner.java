@@ -25,7 +25,7 @@ public class GameRunner {
 			return dice_roll;
 		}
 		
-		public static void player_move(player player_1) {
+		public static int player_move(player player_1) {
 			
 			int dice_roll = 0;
 			int move_type = 3;
@@ -63,7 +63,8 @@ public class GameRunner {
 			
 			//Final Print of player Position
 			System.out.printf("%s is at position %d.\n",player_1.player_name , player_1.current_position);
-			System.out.printf("%s has played %d times. \n",player_1.player_name , player_1.turns_played);
+			System.out.printf("%s has played %d times. \n\n",player_1.player_name , player_1.turns_played);
+			return move_type;
 		}
 		
 	
@@ -72,18 +73,44 @@ public class GameRunner {
 		public static final int SNAKE_CONSTANT = 0;
 		public static final int NO_PLAY_CONSTANT = 1;
 		public static final int LADDER_CONSTANT = 2;
+		public static final int MAX_MOVES = 20000;
 		
 		
 		public static void main(String[] args) {
 			
+			
+			// 2 Players playing the game turn by turn
+			
 			player player1 = new player(0,0,"Shubham");
+			player player2 = new player(0,0,"Prince");
 			System.out.printf("Snake and ladders game :\n\n");
-		
-			//Now Program will terminate after a player reaches 1 million moves
-			while(player1.current_position != WINNING_POSITION && player1.turns_played < 1000000) {
-				player_move(player1);
+			
+			int which_player_plays = 1;
+			
+			while(player1.current_position != WINNING_POSITION 
+					&& player2.current_position != WINNING_POSITION 
+					&& player1.turns_played + player2.turns_played < MAX_MOVES) {
+				
+					int previous_move_ladder_or_no = 0;
+					
+					switch(which_player_plays) {
+					case 1:
+						previous_move_ladder_or_no = player_move(player1);
+						break;
+					case 2:
+						previous_move_ladder_or_no = player_move(player2);
+						break;
+					
+					}
+					
+					if (previous_move_ladder_or_no != LADDER_CONSTANT && which_player_plays == 1)
+						which_player_plays = 2;
+					else if (previous_move_ladder_or_no != LADDER_CONSTANT && which_player_plays == 2)
+						which_player_plays = 1;
 			}
 			
+			if (player1.turns_played + player2.turns_played == MAX_MOVES) 
+					System.out.printf("No player won the Game. Max Moves completed.");
 			
 		}
 }
